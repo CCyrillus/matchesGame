@@ -1,32 +1,23 @@
+import React from "react";
+import { FC } from "react";
+import { Board } from "../models/Board";
+import CellComponent from "./CellComponent";
 
-const BoardComponent = () => {
+interface BoardProps {
+  board: Board;
+  setBoard: (board: Board) => void;
+}
+
+const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
   return (
     <div className="board">
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
-      <div className="cell colour2"></div>
-      <div className="cell colour1"></div>
+      {board.cells.map((row, index) =>
+        <React.Fragment key={index}>
+          {row.map(cell =>
+            <CellComponent cell={cell} key = {cell.id}/>
+          )}
+        </React.Fragment>
+      )}
     </div>
   );
 }

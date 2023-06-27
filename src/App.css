@@ -26,10 +26,15 @@
   align-items: center;
 }
 
-.colour1 {
+.cell img {
+  height: 90px;
+  position: relative;
+}
+
+.color1 {
   background-color: #7ac6df;
 }
 
-.colour2 {
+.color2 {
   background-color: #dee2b5c7;
 }

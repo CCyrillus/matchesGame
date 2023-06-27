@@ -1,8 +1,15 @@
 import React from "react";
+import { FC } from "react";
+import { Cell } from "../models/Cell";
 
-const CellComponent = () => {
+interface CellProps {
+  cell: Cell
+}
+
+const CellComponent: FC<CellProps> = ({ cell }) => {
   return (
-    <div className="cell">
+    <div className={["cell", cell.color].join(' ')}>
+      {cell.figure?.match && <img src={cell.figure.match} alt=""/>}
     </div>
   );
 }
