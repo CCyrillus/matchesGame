@@ -22,9 +22,33 @@ export class Cell {
 
 
     takenMatch(figure: Figure) {
-        this.board.playerMatches.push(figure);
+        if (this.board.isPlayerMove) {
+            this.board.playerMatches.push(figure);
+        } else {
+            this.board.aiMatches.push(figure);
+        }
 
+        this.board.limitMatch.push(figure);
+
+        if (this.board.limitMatch.length === 3) {
+            // this.board.isPlayerMove = false;
+            // this.board.limitMatch = [];
+            this.board.finishTurn();
+            console.log('this.board: ', this.board);
+        }
     }
+
+    moveFigure(target: Cell) {
+        if (this.figure) {
+            target.figure = this.figure;
+            this.takenMatch(target.figure);
+            this.figure = null;
+        }
+    }
+    getCell(x: number, y: number) {
+        return this.cells[y][x];
+    }
+
     // aiTakenMatch(figure: Figure) {
     //     this.board.aiMatches.push(figure);
     // }
@@ -42,14 +66,5 @@ export class Cell {
     //     }
     // }
 
-    moveFigure(target: Cell) {
-        if (this.figure) {
-            target.figure = this.figure;
-            this.takenMatch(target.figure);
-            this.figure = null;
-        }
-    }
-    getCell(x: number, y: number) {
-        return this.cells[y][x];
-    }
+
 }
