@@ -4,12 +4,17 @@ import { Cell } from "../models/Cell";
 
 interface CellProps {
   cell: Cell
+  selected: boolean
+  click: (cell: Cell) => void
 }
 
-const CellComponent: FC<CellProps> = ({ cell }) => {
+const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
   return (
-    <div className={["cell", cell.color].join(' ')}>
-      {cell.figure?.match && <img src={cell.figure.match} alt=""/>}
+    <div
+      className={["cell", cell.color, selected ? "selected" : ""].join(' ')}
+      onClick={() => click(cell)}
+    >
+      {cell.figure?.match && <img height={20} src={cell.figure.match} alt="" />}
     </div>
   );
 }
