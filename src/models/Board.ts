@@ -45,6 +45,8 @@ export class Board {
         newBoard.cells = this.cells;
         newBoard.playerMatches = this.playerMatches;
         newBoard.aiMatches = this.aiMatches;
+        newBoard.isPlayerMove = this.isPlayerMove;
+        newBoard.maxMatchesPerMove = this.maxMatchesPerMove;
         return newBoard;
     }
 

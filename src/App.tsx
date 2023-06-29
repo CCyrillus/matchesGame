@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import BoardComponent from './components/BoardComponent';
-import TakenFigures from './components/TakenFigures';
+import BoardComponent from './components/BoardComponent/BoardComponent';
+import TakenFigures from './components/TakenComponent/TakenFigures';
 import { Board } from './models/Board';
-import { Player } from './models/Player';
 
 import './App.css';
 
 function App() {
 
   const [board, setBoard] = useState(new Board());
-  const [player, setPlayer] = useState(new Player());
-  const [oponentAi, setoponentAi] = useState(new Player());
 
   useEffect(() => {
     restart()
   }, []);
 
   useEffect(() => {
-    console.log('Board: ', board);
-  }, [board]);
+    console.log('BoardApp: ', board);
+  }, [board]); //ERROR1 родительский компонент не сохраняет состояние свойств которые мы назначили в экземпляре
 
   function restart() {
     const newBoard = new Board();

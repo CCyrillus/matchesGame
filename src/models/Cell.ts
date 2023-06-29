@@ -31,13 +31,11 @@ export class Cell {
         this.board.limitMatch.push(figure);
 
         if (this.board.limitMatch.length === 3) {
-            // this.board.isPlayerMove = false;
-            // this.board.limitMatch = [];
             this.board.finishTurn();
-            console.log('this.board: ', this.board);
+            console.log('this.board: ', this.board); //ERROR1 родительский компонент не сохраняет состояние свойств которые мы назначили в экземпляре
         }
     }
-
+    
     moveFigure(target: Cell) {
         if (this.figure) {
             target.figure = this.figure;
@@ -48,10 +46,6 @@ export class Cell {
     getCell(x: number, y: number) {
         return this.cells[y][x];
     }
-
-    // aiTakenMatch(figure: Figure) {
-    //     this.board.aiMatches.push(figure);
-    // }
 
     // AiMoveFigure() {
     //     if (this.board.limitMatch.length > 2) {

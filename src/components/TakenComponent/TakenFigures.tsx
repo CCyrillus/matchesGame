@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { Figure } from "../models/Figure";
+import { FC } from "react";
+import { Figure } from "../../models/Figure";
 
 interface TakenFiguresProps {
     title: string
