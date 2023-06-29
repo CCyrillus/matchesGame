@@ -3,10 +3,23 @@ import { Colors } from "./Colors";
 import { Match } from "./Match";
 
 export class Board {
+
     cells: Cell[][] = [];
-    limitMatch: Array<number> = [];
+
+    limitMatch: Match[] = [];
+
     playerMatches: Match[] = [];
+
     aiMatches: Match[] = [];
+
+    isPlayerMove: boolean;
+
+    maxMatchesPerMove: number;
+
+    constructor() {
+        this.isPlayerMove = true;
+        this.maxMatchesPerMove = 3;
+    }
 
     public initCells() {
         for (let x = 0; x < 5; x++) {
@@ -20,6 +33,11 @@ export class Board {
             }
             this.cells.push(row)
         }
+    }
+
+    public finishTurn() {
+        this.isPlayerMove = !this.isPlayerMove;
+        this.limitMatch = [];
     }
 
     public getCopyBoard(): Board {
@@ -41,4 +59,4 @@ export class Board {
             }
         }
     }
-};
+}

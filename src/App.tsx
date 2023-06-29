@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import BoardComponent from './components/BoardComponent';
 import TakenFigures from './components/TakenFigures';
 import { Board } from './models/Board';
 import { Player } from './models/Player';
+
+import './App.css';
 
 function App() {
 
@@ -13,7 +14,11 @@ function App() {
 
   useEffect(() => {
     restart()
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    console.log('Board: ', board);
+  }, [board]);
 
   function restart() {
     const newBoard = new Board();
@@ -22,9 +27,16 @@ function App() {
     setBoard(newBoard)
   }
 
+  function click() {
+    board.finishTurn();
+  }
+
   return (
     <div className="app">
-      <button className="restart" onClick={() => restart()}>New Game</button>
+      <div className="buttonsWrapper">
+        <button className="restart" onClick={() => restart()}>New Game</button>
+        <button className="pass" onClick={() => click()}>Pass the move</button>
+      </div>
       <BoardComponent
         board={board}
         setBoard={setBoard}
@@ -38,7 +50,7 @@ function App() {
         figures={board.aiMatches}
       />
 
-      
+
     </div>
   );
 }

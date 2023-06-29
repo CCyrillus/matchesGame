@@ -19,11 +19,10 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
       setSelectedCell(cell)
       cell.moveFigure(cell)
       updateBoard()
-      console.log(board.playerMatches)
     }
 
   }
-
+  // console.log('board: ', board);
   function updateBoard() {
     const newBoard = board.getCopyBoard()
     setSelectedCell(null)
@@ -31,21 +30,38 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
   }
 
   return (
-    <div className="board">
-      {board.cells.map((row, index) =>
-        <React.Fragment key={index}>
-          {row.map(cell =>
-            <CellComponent
-              click={click}
-              cell={cell}
-              key={cell.id}
-              selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
-            />
-          )}
+    <div className="boardContainer">
+      <div className="boardWrapper">
 
-        </React.Fragment>
-      )}
-      {/* <button className="take" onClick={() => aiTake()}>End Turn</button> */}
+        <div className="boardTitle">
+          {board.isPlayerMove ? (
+            <h3 className="title player">
+              Your turn
+            </h3>
+          ) : (
+            <h3 className="title playerAi">
+              AI moves
+            </h3>
+          )}
+        </div>
+
+        <div className="board">
+          {board.cells.map((row, index) =>
+            <React.Fragment key={index}>
+              {row.map(cell =>
+                <CellComponent
+                  click={click}
+                  cell={cell}
+                  key={cell.id}
+                  selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
+                />
+              )}
+
+            </React.Fragment>
+          )}
+          {/* <button className="take" onClick={() => aiTake()}>End Turn</button> */}
+        </div>
+      </div>
     </div>
   );
 }
