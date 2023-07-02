@@ -2,23 +2,29 @@ import React, { useState } from "react";
 import { FC } from "react";
 import { Board } from "../../models/Board";
 import { Cell } from "../../models/Cell";
+import { Player } from "../../models/Player";
 import CellComponent from "../CellComponent/CellComponent";
 
 interface BoardProps {
   board: Board;
   setBoard: (board: Board) => void;
+  currentPlayer: Player | null;
+  swapPlayer: () => void;
 }
 
-const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
+const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPlayer }) => {
 
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
- 
+
 
   function click(cell: Cell) {
     if (cell.figure) {
       setSelectedCell(cell)
-      cell.moveFigure(cell)
+      cell.moveFigure(cell, currentPlayer)
       updateBoard()
+    }
+    if (board.limitMatch.length === 3) {
+      swapPlayer()
     }
   }
 
@@ -33,15 +39,9 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
       <div className="boardWrapper">
 
         <div className="boardTitle">
-          {board.isPlayerMove ? (
-            <h3 className="title player">
-              Your turn
-            </h3>
-          ) : (
-            <h3 className="title playerAi">
-              AI moves
-            </h3>
-          )}
+          <h3 className="title player">
+            Хід {currentPlayer?.type}
+          </h3>
         </div>
 
         <div className="board">

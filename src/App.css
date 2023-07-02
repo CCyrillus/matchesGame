@@ -21,10 +21,6 @@
   flex-direction: column;
 }
 
-.restart {
-  margin-bottom: 10px;
-}
-
 .restart, .pass {
   background-color: #0075ff;
   margin-right: 25px;
@@ -40,7 +36,8 @@
   text-decoration: none;
   color: #64c3e0;
   transition: all 0.3s;
-  cursor: pointer
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .restart:hover, .pass:hover {
@@ -56,3 +53,34 @@
   background-color: #005ecc;
 }
 
+.secondPlay {
+  background-color: #f56b6b;
+  margin-right: 25px;
+
+  height: 56px;
+  border: 3px solid #f56b6baf;
+  box-sizing: border-box;
+  border-radius: 8px;
+
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 14px;
+  text-decoration: none;
+  color: #000000;
+  transition: all 0.3s;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.secondPlay:hover {
+  border-color: #f56b6b;
+  background-color: #f56b6b;
+  box-shadow: 0 13px 27px rgba(0, 83, 181, 0.46);
+  color: #fff;
+}
+
+.secondPlay:active {
+  box-shadow: 0 8px 14px rgba(0, 83, 181, 0.48);
+  border-color: #f56b6b;
+  background-color: #f56b6b;
+}

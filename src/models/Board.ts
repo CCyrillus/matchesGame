@@ -1,25 +1,17 @@
 import { Cell } from "./Cell"
 import { Colors } from "./Colors";
-import { Match } from "./Match";
+import { Figure } from "./Figure";
+// import { Match } from "./Match";
 
 export class Board {
 
     cells: Cell[][] = [];
 
-    limitMatch: Match[] = [];
+    limitMatch: Figure[] = [];
 
-    playerMatches: Match[] = [];
+    playerMatches: Figure[] = [];
 
-    aiMatches: Match[] = [];
-
-    isPlayerMove: boolean;
-
-    maxMatchesPerMove: number;
-
-    constructor() {
-        this.isPlayerMove = true;
-        this.maxMatchesPerMove = 3;
-    }
+    aiMatches: Figure[] = [];
 
     public initCells() {
         for (let x = 0; x < 5; x++) {
@@ -35,18 +27,14 @@ export class Board {
         }
     }
 
-    public finishTurn() {
-        this.isPlayerMove = !this.isPlayerMove;
-        this.limitMatch = [];
-    }
 
     public getCopyBoard(): Board {
         const newBoard = new Board();
         newBoard.cells = this.cells;
         newBoard.playerMatches = this.playerMatches;
         newBoard.aiMatches = this.aiMatches;
-        newBoard.isPlayerMove = this.isPlayerMove;
-        newBoard.maxMatchesPerMove = this.maxMatchesPerMove;
+        newBoard.limitMatch = this.limitMatch;
+        
         return newBoard;
     }
 
@@ -57,7 +45,7 @@ export class Board {
     public addFigures() {
         for (let x = 0; x < 5; x++) {
             for (let y = 0; y < 5; y++) {
-                new Match(Colors.even, this.getCell(x, y))
+                new Figure(Colors.even, this.getCell(x, y))
             }
         }
     }

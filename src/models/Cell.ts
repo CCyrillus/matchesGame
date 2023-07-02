@@ -1,9 +1,9 @@
 import { Board } from "./Board";
 import { Colors } from "./Colors";
 import { Figure } from "./Figure";
+import { Player } from "./Player";
 
 export class Cell {
-    cells: Cell[][] = [];
     readonly x: number;
     readonly y: number;
     figure: Figure | null;
@@ -21,30 +21,22 @@ export class Cell {
     }
 
 
-    takenMatch(figure: Figure) {
-        if (this.board.isPlayerMove) {
+    takenMatch(figure: Figure, currentPlayer: Player | null) {
+        if (currentPlayer?.type === 'Player') {
             this.board.playerMatches.push(figure);
         } else {
             this.board.aiMatches.push(figure);
         }
-
+        
         this.board.limitMatch.push(figure);
-
-        if (this.board.limitMatch.length === 3) {
-            this.board.finishTurn();
-            console.log('this.board: ', this.board); //ERROR1 родительский компонент не сохраняет состояние свойств которые мы назначили в экземпляре
-        }
     }
     
-    moveFigure(target: Cell) {
+    moveFigure(target: Cell, currentPlayer: Player | null) {
         if (this.figure) {
             target.figure = this.figure;
-            this.takenMatch(target.figure);
+            this.takenMatch(target.figure, currentPlayer);
             this.figure = null;
         }
-    }
-    getCell(x: number, y: number) {
-        return this.cells[y][x];
     }
 
     // AiMoveFigure() {
